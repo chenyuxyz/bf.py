@@ -9,7 +9,7 @@ class HelloWorldTest(unittest.TestCase):
                .>++.<<+++++++++++++++.>.+++.------.--------.>+.>."""
         expect_output = "Hello World!\n"
         with unittest.mock.patch("sys.stdout", new=StringIO()) as fake_out:
-            bf.run(code)
+            bf.bf_eval(code)
             self.assertEqual(fake_out.getvalue(), expect_output)
 
 if __name__ == "__main__":
