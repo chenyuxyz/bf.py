@@ -17,7 +17,7 @@ def prime_factorize(n):
 
 def generate_int(n):
     if n == 0:
-        return "."
+        return ""
     bfcode = ""
     primes = prime_factorize(n)
     bfcode += "[>".join("+" * p for p in primes)
