@@ -27,10 +27,12 @@ def generate_int(n):
         return bfcode
     if n == 0:
         return ""
-    bfcodes = []
-    bfcodes.append(_generate(n-1)+"+")
-    bfcodes.append(_generate(n))
-    bfcodes.append(_generate(n+1)+"-")
+    bfcodes = [_generate(n)]
+    for i in range(1, 10):
+        if n-i >= 0:
+            bfcodes.append(_generate(n-i) + "+" * i)
+        if n+i < 256:
+            bfcodes.append(_generate(n+i) + "-" * i)
     return min(bfcodes, key=len)
 
 def generate_print_str(string):
