@@ -19,11 +19,11 @@ def generate_int(n):
     def _generate(n):
         if n == 0:
             return ""
-        bfcode = ""
         primes = prime_factorize(n)
-        bfcode += "[>".join("+" * p for p in primes)
-        bfcode += "<-]" * (len(primes) - 1)
-        bfcode += ">" * (len(primes) - 1)
+        bfcode = ">" * (len(primes) - 1)
+        bfcode += "[<".join("+" * p for p in primes)
+        bfcode += ">-]" * (len(primes) - 1)
+        bfcode += "<" * (len(primes) - 1)
         return bfcode
     if n == 0:
         return ""
