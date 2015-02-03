@@ -60,18 +60,37 @@ def bf_to_py(code):
     print("ptr = 0")
     indent = ""
 
-    for c in code:
+    now = 0
+    while now < len(code):
+        c = code[now]
         if c not in "><+-[],.":
+            now += 1
             continue
 
         if c == ">":
-            print(indent + "ptr += 1")
+            accumulated = 1
+            while now + 1 < len(code) and code[now+1] == ">":
+                accumulated += 1
+                now += 1
+            print(indent + "ptr += %d" % accumulated)
         elif c == "<":
-            print(indent + "ptr -= 1")
+            accumulated = 1
+            while now + 1 < len(code) and code[now+1] == "<":
+                accumulated += 1
+                now += 1
+            print(indent + "ptr -= %d" % accumulated)
         elif c == "+":
-            print(indent + "mem[ptr] += 1")
+            accumulated = 1
+            while now + 1 < len(code) and code[now+1] == "+":
+                accumulated += 1
+                now += 1
+            print(indent + "mem[ptr] += %d" % accumulated)
         elif c == "-":
-            print(indent + "mem[ptr] -= 1")
+            accumulated = 1
+            while now + 1 < len(code) and code[now+1] == "-":
+                accumulated += 1
+                now += 1
+            print(indent + "mem[ptr] -= %d" % accumulated)
         elif c == ",":
             print(indent + "mem[ptr] = ord(input()[0])")
         elif c == ".":
@@ -81,3 +100,5 @@ def bf_to_py(code):
             indent += " " * 4
         elif c == "]":
             indent = indent[:-4]
+
+        now += 1
