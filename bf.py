@@ -50,3 +50,30 @@ def bf_eval(code):
         elif command == "]":
             now = bracesmap[now] - 1
         now += 1
+
+def bf_to_py(code):
+    print("mem = [0] * 30000")
+    print("ptr = 0")
+    indent = ""
+
+    for c in code:
+        if c not in "><+-[],.":
+            continue
+
+        if c == ">":
+            print(indent + "ptr += 1")
+        elif c == "<":
+            print(indent + "ptr -= 1")
+        elif c == "+":
+            print(indent + "mem[ptr] += 1")
+        elif c == "-":
+            print(indent + "mem[ptr] -= 1")
+        elif c == ",":
+            print(indent + "mem[ptr] = ord(input()[0])")
+        elif c == ".":
+            print(indent + "print(chr(mem[ptr]), end=\"\")")
+        elif c == "[":
+            print(indent + "while mem[ptr]:")
+            indent += " " * 4
+        elif c == "]":
+            indent = indent[:-4]
