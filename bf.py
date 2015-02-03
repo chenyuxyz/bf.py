@@ -38,8 +38,12 @@ def bf_eval(code):
             ptr -= 1
         elif command == "+":
             mem[ptr] += 1
+            if mem[ptr] > 255:
+                raise Exception("Single cell cannot exceed 255")
         elif command == "-":
             mem[ptr] -= 1
+            if mem[ptr] < 0:
+                raise Exception("Single cell cannot below 0")
         elif command == ",":
             mem[ptr] = ord(input()[0])
         elif command == ".":
